@@ -23,3 +23,11 @@ Array.prototype.get_list_dic=function(){
     return dic;
 }
 console.log(userlist.get_list_dic());
+
+function myPrototype(name){
+    return this.name + " " + "Added by myPrototype class";
+}
+
+myPrototype.prototype=obj;
+const myp = new myPrototype("Shivam Jha");
+console.log(myp.rollno);
