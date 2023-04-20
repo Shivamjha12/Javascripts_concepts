@@ -1,0 +1,78 @@
+<html>
+<head></head>
+<body>
+    <h1>Hello, world!</h1>
+
+<script>
+
+const datas = [
+    { name:"shivam jha",proffesion:"Business Man", age: 28},
+    { name:"shivam jha",proffesion:"Software Engineer", age:22},
+]
+
+
+// the problem we facing createData function taking extra time tha getDatas function, so because of this we don't get uodated data
+// we improve this by using call backs and (async,await) method and keywords
+function getDatas(){
+    setTimeout(()=>{
+        let output;
+    datas.forEach((data,index)=>{
+        output+=`<div style="margin-top:10px"><li>${data.name}</li> <li>${data.proffesion}</li> <li>${data.age}</li></div>`;
+    })
+    document.body.innerHTML = output;
+    }, 1000);
+    
+}
+
+// function createData(newdata){
+//    setTimeout(()=>{
+//        datas.push(newdata);
+//    }, 3000);
+//}
+
+//createData({ name:"Hari Das",proffesion:"Devote", age: 55}).then(getDatas);
+//getDatas();
+
+
+// callback function
+// we passed the getdata function in createdata function, and when we push newdata to datas, then we callback() the passed function getdata-> which render the html
+
+//    function createData(newdata,callback){
+//        setTimeout(()=>{
+//            datas.push(newdata);
+//            callback();
+//        }, 2000);
+//    }
+
+
+// promises
+
+function createData1(newdata){
+    return new Promise((resolve,reject)=>{
+        setTimeout(()=>{
+            datas.push(newdata);
+            let error = false;
+            if(!error){
+                resolve();
+            }
+            else{
+                reject("khuch error h");
+            }
+        }, 2000);
+    })
+}
+// createData1({ name:"Hari Das",proffesion:"Devote", age: 55}).then(getDatas).catch((error)=>{ console.log(error)})
+
+
+// async and await 
+
+async function start(){
+    await createData1({ name:"Hari Das",proffesion:"Devote", age: 55});
+    getDatas();
+}
+start();
+
+
+</script>
+</body>
+</html>
